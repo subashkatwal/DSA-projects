@@ -70,7 +70,8 @@ int main()
         {
             while (
                 (!st.empty() && precedenceLevel(exp[i]) < precedenceLevel(st.top())) ||
-                ((!st.empty() && precedenceLevel(exp[i]) == precedenceLevel(st.top())) && (!st.empty() && associativity(exp[i]) == "LTR"))
+                ((!st.empty() && precedenceLevel(exp[i]) == precedenceLevel(st.top())) && 
+                (!st.empty() && associativity(exp[i]) == "LTR"))
                 )
             {
                 postfix += st.top();
