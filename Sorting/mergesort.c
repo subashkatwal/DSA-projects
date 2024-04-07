@@ -78,7 +78,7 @@ void mergeSort(int arr[], int l, int r)
 	} 
 } 
 
-// UTILITY FUNCTIONS 
+
 // Function to print an array 
 void printArray(int A[], int size) 
 { 
@@ -88,7 +88,7 @@ void printArray(int A[], int size)
 	printf("\n"); 
 } 
 
-// Driver code 
+
 int main() 
 { 
 	int arr[] = { 12, 11, 13, 5, 6, 7 }; 

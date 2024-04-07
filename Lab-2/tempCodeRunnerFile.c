@@ -1,66 +1,70 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX 50
 
-#define MAX_SIZE 100
+int queue_array[MAX];
+int rear = -1;
+int front = -1;
 
-typedef struct {
-    int data;
-    int next;
-} Node;
-
-Node linkedList[MAX_SIZE];
-int head = -1;
-int available = 0;
-
-void initializeLinkedList() {
-    int i;
-    for (i = 0; i < MAX_SIZE - 1; i++) {
-        linkedList[i].next = i + 1;
+void insert() {
+    int add_item;
+    if (rear == MAX - 1)
+        printf("Queue Overflow \n");
+    else {
+        if (front == -1) /*If queue is initially empty */
+            front = 0;
+        printf("Enter the element to insert in queue : ");
+        scanf("%d", &add_item);
+        rear = rear + 1;
+        queue_array[rear] = add_item;
     }
-    linkedList[MAX_SIZE - 1].next = -1;
 }
 
-int getNode() {
-    if (available == -1) {
-        printf("Memory Overflow\n");
-        exit(EXIT_FAILURE);
+void deleteElement() {
+    if (front == -1 || front > rear) {
+        printf("Queue Underflow \n");
+    } else {
+        printf("Deleted element from queue is : %d\n", queue_array[front]);
+        front = front + 1;
     }
-    int nodeIndex = available;
-    available = linkedList[available].next;
-    return nodeIndex;
-}
-
-void freeNode(int index) {
-    linkedList[index].next = available;
-    available = index;
-}
-
-void insert(int value) {
-    int newNode = getNode();
-    linkedList[newNode].data = value;
-    linkedList[newNode].next = head;
-    head = newNode;
 }
 
 void display() {
-    int current = head;
-    while (current != -1) {
-        printf("%d ", linkedList[current].data);
-        current = linkedList[current].next;
+    int i;
+    if (front == -1)
+        printf("Queue is empty \n");
+    else {
+        printf("Elements inside the Queue is : \n");
+        for (i = front; i <= rear; i++)
+            printf("%d ", queue_array[i]);
+        printf("\n");
     }
-    printf("\n");
-
 }
 
 int main() {
-    initializeLinkedList();
-    
-    insert(1);
-    insert(2);
-    insert(3);
-
-    printf("Array after singly linked operation is\n");
-    display();
-
+    int choice;
+    while (1) {
+        printf("1.Insert element to queue \n");
+        printf("2.Delete element from queue \n");
+        printf("3.Display all elements of queue \n");
+        printf("4.Quit \n");
+        printf("Enter your choice : ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                insert();
+                break;
+            case 2:
+                deleteElement();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                exit(1);
+            default:
+                printf("Wrong choice \n");
+        } /* End of switch */
+    } /* End of while */
     return 0;
-}
+} /* End of main() */
